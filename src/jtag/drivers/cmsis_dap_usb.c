@@ -770,6 +770,28 @@ static int cmsis_dap_get_version_info(void)
 	return ERROR_OK;
 }
 
+#if 0
+static int cmsis_dap_get_vid_pid(void)
+{
+	uint8_t *data;
+	int retval = cmsis_dap_cmd_DAP_Info(INFO_ID_VID, &data);
+	if (retval != ERROR_OK)
+		return retval;
+
+	uint8_t vid = data[0];
+
+	retval = cmsis_dap_cmd_DAP_Info(INFO_ID_PID, &data);
+	if (retval != ERROR_OK)
+		return retval;
+
+	uint8_t pid = data[0];
+
+	LOG_INFO("CMSIS-DAP: vid:pid = %x:%x", vid, pid);
+
+	return retval;
+}
+#endif
+
 static int cmsis_dap_get_caps_info(void)
 {
 	uint8_t *data;
@@ -901,6 +923,12 @@ static int cmsis_dap_init(void)
 	retval = cmsis_dap_get_serial_info();
 	if (retval != ERROR_OK)
 		return retval;
+
+#if 0
+	retval = cmsis_dap_get_vid_pid();
+	if (retval != ERROR_OK)
+		return retval;
+#endif
 
 	if (swd_mode) {
 		retval = cmsis_dap_swd_open();
