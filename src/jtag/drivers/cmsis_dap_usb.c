@@ -164,7 +164,12 @@ static bool swd_mode;
 
 static const char * const info_caps_str[] = {
 	"SWD  Supported",
-	"JTAG Supported"
+	"JTAG Supported",
+	"SWO Manchester Supported",
+	"SWO Uart Supported",
+	"Atomic Commands Supported",
+	"Test Domain Timer Supported",
+	"SWO Streaming Trace Supported",
 };
 
 /* max clock speed (kHz) */
@@ -779,10 +784,9 @@ static int cmsis_dap_get_caps_info(void)
 
 		cmsis_dap_handle->caps = caps;
 
-		if (caps & INFO_CAPS_SWD)
-			LOG_INFO("CMSIS-DAP: %s", info_caps_str[0]);
-		if (caps & INFO_CAPS_JTAG)
-			LOG_INFO("CMSIS-DAP: %s", info_caps_str[1]);
+		for (size_t i = 0; i < ARRAY_SIZE(info_caps_str); i++)
+			if (caps & (1<<i))
+				LOG_INFO("CMSIS-DAP: %s", info_caps_str[i]);
 	}
 
 	return ERROR_OK;
