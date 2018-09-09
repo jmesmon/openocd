@@ -77,18 +77,25 @@ static bool swd_mode;
 #define CMD_DAP_RESET_TARGET      0x0A
 
 /* CMD_INFO */
-#define INFO_ID_VID               0x00      /* string */
+#define INFO_ID_VID               0x01      /* string */
 #define INFO_ID_PID               0x02      /* string */
 #define INFO_ID_SERNUM            0x03      /* string */
 #define INFO_ID_FW_VER            0x04      /* string */
 #define INFO_ID_TD_VEND           0x05      /* string */
 #define INFO_ID_TD_NAME           0x06      /* string */
 #define INFO_ID_CAPS              0xf0      /* byte */
+#define INFO_ID_TEST_DOMAIN_TIMER 0xf1
+#define INFO_ID_SWO_TRACE_BUFFER_SZ 0xfd    /* word (u32) */
 #define INFO_ID_PKT_CNT           0xfe      /* byte */
 #define INFO_ID_PKT_SZ            0xff      /* short */
 
-#define INFO_CAPS_SWD             0x01
-#define INFO_CAPS_JTAG            0x02
+#define INFO_CAPS_SWD             (1<<0)
+#define INFO_CAPS_JTAG            (1<<1)
+#define INFO_CAPS_SWO_UART	  (1<<2)
+#define INFO_CAPS_SWO_MANCHESTER  (1<<3)
+#define INFO_CAPS_ATOMIC_CMDS	  (1<<4)
+#define INFO_CAPS_TEST_DOMAIN_TIMER (1<<5)
+#define INFO_CAPS_SWO_STREAMING_TRACE (1<<6)
 
 /* CMD_LED */
 #define LED_ID_CONNECT            0x00
