@@ -78,7 +78,7 @@
 #define TPIU_FSCR	0xE0040308
 
 /* DCB_DHCSR bit and field definitions */
-#define DBGKEY		(0xA05F << 16)
+#define DBGKEY		(0xA05Ful << 16)
 #define C_DEBUGEN	(1 << 0)
 #define C_HALT		(1 << 1)
 #define C_STEP		(1 << 2)
